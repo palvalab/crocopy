@@ -1,0 +1,15 @@
+*checkpoints
+.vscode
+__pycache__/
+*pycache*
+images/*
+derivatives/*
+tmp/*
+.idea/*
+.vscode/*
+*.pyc
+dist/*
+build/*
+crosspy.egg-info/*
+.tmp/*
+data/tutorial_data/*
