@@ -1,6 +1,6 @@
 ---
 title: >-
-	CROCpy - A Python toolbox for the analysis of  CRitical Oscillations and Connectivity
+	CROCOpy - A Python toolbox for the analysis of  CRitical Oscillations and COnnectivity
 authors:
   - name: Vladislav Myrov
     affiliation: "1"
@@ -37,7 +37,7 @@ affiliations:
     name: Centre for Cognitive Neuroimaging, Institute of Neuroscience and Psychology, University of Glasgow, UK
   - index: 6
 	name: IRCCS Giannina Gaslini, Genoa, Italy
-bibliography: crocpy_refs.bib
+bibliography: CROCOpy_refs.bib
 tags:
   - electrophysiology
   - oscillations
@@ -47,13 +47,13 @@ tags:
 
 # Summary
 
-`CROCpy` is a light-weighted toolbox for the assessment of neuronal oscillations, and multiple observables of functional connectivity (phase synchronization, amplitude coupling, and cross-frequency coupling) and critical dynamics (avalanches, long-range temporal correlations, bistability, and functional excitation-inhibition ratio). It was developed to simplify the analysis of continuous electrophysiological recordings and, in addition to metric computation, also includes methods for narrow-band filtering and statistical analysis. It is device-agnostic and supports both GPU and CPU computations. The toolbox also provides detailed tutorials.
+`CROCOpy` is a light-weighted toolbox for the assessment of neuronal oscillations, and multiple observables of functional connectivity (phase synchronization, amplitude coupling, and cross-frequency coupling) and critical dynamics (avalanches, long-range temporal correlations, bistability, and functional excitation-inhibition ratio). It was developed to simplify the analysis of continuous electrophysiological recordings and, in addition to metric computation, also includes methods for narrow-band filtering and statistical analysis. It is device-agnostic and supports both GPU and CPU computations. The toolbox also provides detailed tutorials.
 
 # Statement of need
 
 The brain is a complex dynamical system, where neuronal interactions across spatiotemporal scales give rise to neural oscillations. These oscillations are related to each other by various forms of functional connectivity, and exhibit various forms of scale invariance such as avalanche dynamics, long-range temporal correlations (LRTCs), and bistability. Such concurrent and diverse activity patterns are hypothesized to emerge when a system is operating near a critical transition between order and disorder, a conceptual framework known as *brain criticality*.
 
-Increasing evidence suggests that functional connectivity and critical dynamics are closely related to each other. Studying these together can therefore offer a holistic picture of neuronal dynamics. We here present `CROCpy`, a unified and open-source Python toolbox, which combines implementations of multiple metrics used to analyze neuronal oscillations, their functional connectivity, and (critical) dynamics. The metrics it provides can be used for both basic research and as biomarkers in clinical contexts.
+Increasing evidence suggests that functional connectivity and critical dynamics are closely related to each other. Studying these together can therefore offer a holistic picture of neuronal dynamics. We here present `CROCOpy`, a unified and open-source Python toolbox, which combines implementations of multiple metrics used to analyze neuronal oscillations, their functional connectivity, and (critical) dynamics. The metrics it provides can be used for both basic research and as biomarkers in clinical contexts.
 
 # State of the field
 
@@ -61,7 +61,7 @@ While several toolboxes exist that offer implementations of metrics for either c
 
 # Software design
 
-`CROCpy` was designed to be as simple and flexible as possible and operates with basic N-dimensional arrays. Many operations can be indiscriminately run on either CPUs or GPUs, flexibly using either numpy or cupy under the hood.  For most metrics, `CROCpy` supports GPU acceleration for efficient analysis of very large datasets. Additionally, `CROCpy` implements routines for narrow-band filtering and several commonly used statistical tests, with tutorials provided on GitHub.
+`CROCOpy` was designed to be as simple and flexible as possible and operates with basic N-dimensional arrays. Many operations can be indiscriminately run on either CPUs or GPUs, flexibly using either numpy or cupy under the hood.  For most metrics, `CROCOpy` supports GPU acceleration for efficient analysis of very large datasets. Additionally, `CROCOpy` implements routines for narrow-band filtering and several commonly used statistical tests, with tutorials provided on GitHub.
 
 Observables can be grouped in three categories (Table 1):
 
@@ -99,7 +99,7 @@ In the _criticality_ framework, the brain is hypothesized to be comparable to a 
 
 ![**A** Suprathreshold peak detection and time binning. **B** Peak counts per time bin. **C** Avalanche duration distribution with power-law fit.](figures/avalanches_panel.png){#fig:avalanches style="width: 70%; margin: auto; align: right;" }
 
-Neuronal avalanches in multichannel MEG/SEEG recordings are brief cascades of large-amplitude neuronal events that propagate across brain areas and exhibit power-law event size and lifetime distributions. `CROCpy` first detects in each channel the peaks (local maxima) whose amplitude exceeds a chosen threshold $T$ (Figure 1A), convert each suprathreshold peak to a binary event, after which the time series is discretized into regularly-spaced time bins within which the number of spiking events are counted (Figure 1B). An avalanche is defined as a contiguous sequence of non-empty bins and its size is quantify as the total number of suprathreshold peaks in that sequence and its duration is the number of consecutive occupied bins [@Zhigalov2015]. Finally, the power-law is fitted to a distribution of avalanche sizes/lengths (Figure 1C).
+Neuronal avalanches in multichannel MEG/SEEG recordings are brief cascades of large-amplitude neuronal events that propagate across brain areas and exhibit power-law event size and lifetime distributions. `CROCOpy` first detects in each channel the peaks (local maxima) whose amplitude exceeds a chosen threshold $T$ (Figure 1A), convert each suprathreshold peak to a binary event, after which the time series is discretized into regularly-spaced time bins within which the number of spiking events are counted (Figure 1B). An avalanche is defined as a contiguous sequence of non-empty bins and its size is quantify as the total number of suprathreshold peaks in that sequence and its duration is the number of consecutive occupied bins [@Zhigalov2015]. Finally, the power-law is fitted to a distribution of avalanche sizes/lengths (Figure 1C).
 
 ### Long range temporal correlations (LRTCs)
 
@@ -111,7 +111,7 @@ LRTCs in narrow-band oscillations describe how the amplitude of an oscillation f
 
 ![**A** Narrowband envelope time series. **B** Envelope power normalized to 0-1 range. **C** Power distribution with exponential and bi-exponential fits.](figures/bis_panel.png){#fig:bis style="width: 70%; margin: auto; align: right;"}
 
-Bistability refers to dynamics that alternate between “down” and “up” states of synchrony, arising from positive feedback mechanisms, and is nonlinearly related to measures of criticality [@Wang2023] (Figure 3A). First, narrow-band power time-series (squared envelope) is computed and normalized by maximum value (Figure 3B). Next, 'CROCpy' compares whether its empirical distribution is better fitted by single exponential or bi-exponential function using Bayesian Information Criterion (BIC, Figure 3C, [@Freyer2009]).
+Bistability refers to dynamics that alternate between “down” and “up” states of synchrony, arising from positive feedback mechanisms, and is nonlinearly related to measures of criticality [@Wang2023] (Figure 3A). First, narrow-band power time-series (squared envelope) is computed and normalized by maximum value (Figure 3B). Next, 'CROCOpy' compares whether its empirical distribution is better fitted by single exponential or bi-exponential function using Bayesian Information Criterion (BIC, Figure 3C, [@Freyer2009]).
 
 $$
 \mathrm{BiS}=
@@ -146,7 +146,7 @@ FC denotes the statistical dependencies between neurophysiological signals recor
 
 ![**A** Narrowband signals $X$ and $Y$, their phases, and phase difference $\Delta\theta(t)$. **B** Phase-difference distribution (circular plot) and corresponding imaginary-part distributions used for PLV/iPLV/wPLI.](figures/ps_panel.png){#fig:ps width="100%"}
 
-PS refers to coupling between brain regions via a temporally stable phase difference between narrow-band signals (Figure 6A, [@Palva2012]). With 'CROCpy', PS can be estimated using the phase locking value (PLV), the imaginary phase-locking value (iPLV), and weighted Phase Lag Index (wPLI). EEG/MEG data are affected by linear signal mixing, which induces spurious interactions at zero phase lag [@Palva2018Ghost]. To avoid these false positives, iPLV only uses the imaginary component of the complex phase lag (which is zero when the phase lag is zero or a multiple of pi, Figure 6B), while the wPLI down-weights phase relationships near zero lag by weighting the phase difference by the magnitude of the imaginary component (Figure 6C, [@Vinck2011]).
+PS refers to coupling between brain regions via a temporally stable phase difference between narrow-band signals (Figure 6A, [@Palva2012]). With 'CROCOpy', PS can be estimated using the phase locking value (PLV), the imaginary phase-locking value (iPLV), and weighted Phase Lag Index (wPLI). EEG/MEG data are affected by linear signal mixing, which induces spurious interactions at zero phase lag [@Palva2018Ghost]. To avoid these false positives, iPLV only uses the imaginary component of the complex phase lag (which is zero when the phase lag is zero or a multiple of pi, Figure 6B), while the wPLI down-weights phase relationships near zero lag by weighting the phase difference by the magnitude of the imaginary component (Figure 6C, [@Vinck2011]).
 
 Both PLV and iPLV can be derived from the complex-valued PLV which is defined as: 
 
@@ -172,7 +172,7 @@ Various studies have indicated that neuronal oscillations interact not only with
 
 CFS, also known as phase-phase coupling, is an extension of PLV to two oscillations with an integer frequency ratio n:m. CFS is estimated by estimating the phase-locking  after phase-accelerating the slower oscillation (i.e., by multiplying its phase by m/n, Figure 7A). As CFC is assumed to be largely unaffected by linear mixing, it is not necessary to discard the real component of the cPLV [@Palva2018CF].
 
-PAC captures the dependence between the phase of a slower rhythm and the amplitude envelope of a faster rhythm, testing whether high-frequency power is systematically modulated at specific phases of the low-frequency oscillation. Several approaches exist for estimating PAC that generally yield comparable results. 'CROCpy' implements PLV-PAC, which estimates PAC as the PLV between the slow oscillations' phase and the phase of the amplitude envelope of the fast oscillation after wavelet convolution with the slow frequency (Figure 7B).
+PAC captures the dependence between the phase of a slower rhythm and the amplitude envelope of a faster rhythm, testing whether high-frequency power is systematically modulated at specific phases of the low-frequency oscillation. Several approaches exist for estimating PAC that generally yield comparable results. 'CROCOpy' implements PLV-PAC, which estimates PAC as the PLV between the slow oscillations' phase and the phase of the amplitude envelope of the fast oscillation after wavelet convolution with the slow frequency (Figure 7B).
 
 ## Outlook and Future Efforts
 
@@ -180,7 +180,7 @@ The tools described above reflect the current implementation as of January 2026.
 
 ## Research impact statement
 
-CROCpy has been used in multiple publications from several labs, including analyses of resting-state iSEEG functional connectivity of high-frequency oscillations, the relationship between DFA and phase synchronization, MEG/EEG data from patients with epilepsy, time-resolved features of multi-day ECoG recordings, and changes in brain dynamics during sleep.
+CROCOpy has been used in multiple publications from several labs, including analyses of resting-state iSEEG functional connectivity of high-frequency oscillations, the relationship between DFA and phase synchronization, MEG/EEG data from patients with epilepsy, time-resolved features of multi-day ECoG recordings, and changes in brain dynamics during sleep.
 
 # AI usage disclosure
 
