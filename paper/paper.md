@@ -37,7 +37,7 @@ affiliations:
     name: Centre for Cognitive Neuroimaging, Institute of Neuroscience and Psychology, University of Glasgow, UK
   - index: 6
 	name: IRCCS Giannina Gaslini, Genoa, Italy
-bibliography: CROCOpy_refs.bib
+bibliography: crocpy_refs.bib
 tags:
   - electrophysiology
   - oscillations
