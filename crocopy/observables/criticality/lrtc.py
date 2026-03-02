@@ -215,7 +215,7 @@ def _calc_rms(x: NDArray[float], window_size: int, max_nan_frac: float=0.2, over
     rms = rms_flat.reshape(n_signals, n_windows)
     return rms
 
-def _compute_dfa_rms(data, win_lengths, max_nan_frac=0.2, overlap=0.5):
+def _compute_dfa_rms(data, win_lengths, max_nan_frac=0.2, overlap=0.5) -> NDArray[float]:
     """
     DFA fluctuation function for multiple signals (rows), NumPy/CuPy, NaN-aware,
     with overlapping windows.
@@ -279,7 +279,7 @@ def _compute_dfa_rms(data, win_lengths, max_nan_frac=0.2, overlap=0.5):
     return fluct
 
 
-def _compute_dfa_fft(data_orig: NDArray[float], win_lengths: Sequence[int]) -> Tuple[NDArray[float], NDArray[float]]:
+def _compute_dfa_fft(data_orig: NDArray[float], win_lengths: Sequence[int]) -> NDArray[float]:
     """
     Compute DFA using FFT-based method (Nolte 2019 Sci Rep).
 
@@ -377,7 +377,7 @@ def compute_dfa(data: NDArray[float | complex], window_lengths: Sequence[int], m
         fluct =  _compute_dfa_fft(data, window_lengths, **method_kwargs)
         
     if not(xp is np):
-        fluct = xp.asnumpy(fluct)
+        fluct = fluct.get()
     
     dfa_values, r_squared_values, intercept_values = _fit_dfa_exponent(window_lengths, fluct, weighting=weighting, N_samp=data.shape[-1], 
                                                                         min_valid_fraction=min_valid_windows_fraction, fitting=fitting)
